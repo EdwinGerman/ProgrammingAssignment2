@@ -2,15 +2,35 @@
 ## functions do
 
 ## Write a short comment describing this function
-##Hola mi nombre es Edwin Maldonado
 
+##This function recibed a matrix and will return
+## a cached matrix
 makeCacheMatrix <- function(x = matrix()) {
-        ## Write a short comment describing this function 
+        m <- NULL
+        set <- function(y) {
+                x<<-y
+                m<<-NULL
+        }
+        get <- function() x
+        setinverse <- function(inverse) m<<- inverse
+        getinverse <- function()m
+        list (set=set, get=get, setinverse = setinverse, getinverse=getinverse)
+        
 }
 
-
 ## Write a short comment describing this function
-
+##This function recived the cahed matrix an will
+## return the inversed matrix using the function solve()
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
+        m<-x$getinverse()
+        if (!is.null(m))
+        {
+                message("cached data")
+                return(m)
+        }
+        data <- x$get()
+        m<- solve(data, ...)
+        x$setinverse(m)
+        m
 }
